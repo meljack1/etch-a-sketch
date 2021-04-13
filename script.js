@@ -1,7 +1,29 @@
 const container = document.querySelector('#container');
 const clearButton = document.querySelector('#clearButton');
 const sizeButton = document.querySelector('#sizeButton');
+let color = "black";
 
+const blackButton = document.querySelector('#blackButton');
+const randomButton = document.querySelector('#randomButton');
+const greyButton = document.querySelector('#greyButton');
+const pickButton = document.querySelector('#pickButton');
+const pickValue = document.querySelector('#pickValue');
+
+blackButton.addEventListener('click', () => {
+    color = "black";
+});
+
+pickButton.addEventListener('click', () => {
+    color = `${pickValue.value}`;
+});
+
+randomButton.addEventListener('click', () => {
+    color = "random";
+});
+
+greyButton.addEventListener('click', () => {
+    color = "grey";
+})
 
 function makeDivs(number) {
     for (let i = 0; i < (number*number); i++) {
@@ -10,7 +32,23 @@ function makeDivs(number) {
         container.appendChild(gridDiv);  
         // outside function to add hover effect not working? 
         gridDiv.addEventListener('mouseover', () => {
-            gridDiv.classList.add("gridDivHover");
+            if (color == "random") {
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                gridDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            } else if (color == "grey") {
+                let o = Number(gridDiv.style.backgroundColor.slice(-3, -1));
+                let r = 0;
+                let g = 0;
+                let b = 0;
+                if (o < 0.9) {
+                    o += 0.1;
+                }
+                gridDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b}, ${o})`; 
+            } else {
+                gridDiv.style.backgroundColor = `${color}`;
+            }
         })
         container.style.gridTemplateRows = `repeat(${number}, 1fr)`;
         container.style.gridTemplateColumns = `repeat(${number}, 1fr)`;
@@ -30,7 +68,7 @@ sizeButton.addEventListener('click', () => {
 clearButton.addEventListener('click', () => {
     let gridDivAll = document.querySelectorAll('.gridDiv');
     let gridDivArray = Array.from(gridDivAll);
-    gridDivArray.forEach(element => element.classList.remove("gridDivHover"));
+    gridDivArray.forEach(element => element.style.backgroundColor = "rgb(255, 255, 255, 0.0)");
 });
 
 function removeDivs() {
@@ -40,6 +78,8 @@ function removeDivs() {
         gridDivArray[a].parentNode.removeChild(gridDivArray[a]);
     } 
 }
+
+
 
 // broken: function to add hover effect from outside main function
 /* gridDivArray.forEach(element => element.addEventListener('mouseover', () => {

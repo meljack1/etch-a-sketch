@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Quantico:wght@700&display=swap');
+
 body {
+    font-size: 16px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -14,8 +17,11 @@ body {
     border-width: 0px 3px 0px 0px;
 }
 
-#button {
-    margin: 10px;
+button {
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    margin: 5px;
 }
 
 #container {
@@ -32,11 +38,8 @@ body {
 
 .gridDiv {
     border-style: solid;
-    border-width: 1px;
+    border-width: 0px 1px 1px 0px;
     border-color: black;
     background-color: white;
 }
 
-.gridDivHover {
-    background-color: black;
-}
