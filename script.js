@@ -25,7 +25,7 @@ greyButton.addEventListener('click', () => {
     color = "grey";
 });
 
-
+// makes a (number x number) grid 
 function makeDivs(number) {
     for (let i = 0; i < (number*number); i++) {
         let gridDiv = document.createElement("div");
@@ -36,6 +36,7 @@ function makeDivs(number) {
     }
 }; 
 
+// assigns slider value to number of grid rows/columns
 sizeButton.addEventListener('click', () => {
     let number = sizeButton.value;
     removeDivs();
@@ -43,7 +44,7 @@ sizeButton.addEventListener('click', () => {
     changeHoverColor()
 });
     
-
+// clear button clears all colours
 clearButton.addEventListener('click', () => {
     let gridDivAll = document.querySelectorAll('.gridDiv');
     let gridDivArray = Array.from(gridDivAll);
