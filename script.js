@@ -1,41 +1,47 @@
 const container = document.querySelector('#container');
-const button = document.querySelector('#button');
+const clearButton = document.querySelector('#clearButton');
+const sizeButton = document.querySelector('#sizeButton');
 
 
-
- function makeDivs() {
-    for (let i = 0; i < 100; i++) {
+function makeDivs(number) {
+    for (let i = 0; i < (number*number); i++) {
         let gridDiv = document.createElement("div");
         gridDiv.classList.add("gridDiv");
         container.appendChild(gridDiv);  
+        // outside function to add hover effect not working? 
+        gridDiv.addEventListener('mouseover', () => {
+            gridDiv.classList.add("gridDivHover");
+        })
+        container.style.gridTemplateRows = `repeat(${number}, 1fr)`;
+        container.style.gridTemplateColumns = `repeat(${number}, 1fr)`;
     }
 }; 
 
-/* function makeDivs() {
-    let number;
-    button.addEventListener('click', () => {
-        number = prompt("Type a number between 10 and 50")
-        for (i = 0; i < (number*number); i++) {
-            let gridDiv = document.createElement("div");
-            gridDiv.classList.add("gridDiv");
-            container.appendChild(gridDiv);  
-        }
-    })
+makeDivs(10);
+
+
+sizeButton.addEventListener('click', () => {
+    let number = sizeButton.value;
+    removeDivs();
+    makeDivs(number);
+});
     
-}; */
 
-makeDivs();
-
-let gridDivAll = document.querySelectorAll('.gridDiv');
-let gridDivArray = Array.from(gridDivAll);
-
-gridDivArray.forEach(element => element.addEventListener('mouseover', () => {
-    element.classList.add("gridDivHover");
-}));
-
-button.addEventListener('click', () => {
+clearButton.addEventListener('click', () => {
+    let gridDivAll = document.querySelectorAll('.gridDiv');
+    let gridDivArray = Array.from(gridDivAll);
     gridDivArray.forEach(element => element.classList.remove("gridDivHover"));
 });
 
+function removeDivs() {
+    let gridDivAll = document.querySelectorAll('.gridDiv');
+    let gridDivArray = Array.from(gridDivAll);
+    for (let a = 0; a < gridDivArray.length; a++){
+        gridDivArray[a].parentNode.removeChild(gridDivArray[a]);
+    } 
+}
 
-
+// broken: function to add hover effect from outside main function
+/* gridDivArray.forEach(element => element.addEventListener('mouseover', () => {
+    element.classList.add("gridDivHover");
+})); */
