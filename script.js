@@ -1,8 +1,8 @@
 const container = document.querySelector('#container');
 const clearButton = document.querySelector('#clearButton');
 const sizeButton = document.querySelector('#sizeButton');
-let color = "black";
 
+let color = "black";
 const blackButton = document.querySelector('#blackButton');
 const randomButton = document.querySelector('#randomButton');
 const greyButton = document.querySelector('#greyButton');
@@ -23,45 +23,24 @@ randomButton.addEventListener('click', () => {
 
 greyButton.addEventListener('click', () => {
     color = "grey";
-})
+});
+
 
 function makeDivs(number) {
     for (let i = 0; i < (number*number); i++) {
         let gridDiv = document.createElement("div");
         gridDiv.classList.add("gridDiv");
         container.appendChild(gridDiv);  
-        // outside function to add hover effect not working? 
-        gridDiv.addEventListener('mouseover', () => {
-            if (color == "random") {
-                let r = Math.floor(Math.random() * 255);
-                let g = Math.floor(Math.random() * 255);
-                let b = Math.floor(Math.random() * 255);
-                gridDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-            } else if (color == "grey") {
-                let o = Number(gridDiv.style.backgroundColor.slice(-3, -1));
-                let r = 0;
-                let g = 0;
-                let b = 0;
-                if (o < 0.9) {
-                    o += 0.1;
-                }
-                gridDiv.style.backgroundColor = `rgb(${r}, ${g}, ${b}, ${o})`; 
-            } else {
-                gridDiv.style.backgroundColor = `${color}`;
-            }
-        })
         container.style.gridTemplateRows = `repeat(${number}, 1fr)`;
         container.style.gridTemplateColumns = `repeat(${number}, 1fr)`;
     }
 }; 
 
-makeDivs(10);
-
-
 sizeButton.addEventListener('click', () => {
     let number = sizeButton.value;
     removeDivs();
     makeDivs(number);
+    changeHoverColor()
 });
     
 
@@ -77,11 +56,32 @@ function removeDivs() {
     for (let a = 0; a < gridDivArray.length; a++){
         gridDivArray[a].parentNode.removeChild(gridDivArray[a]);
     } 
-}
+};
 
+function changeHoverColor() {
+    let gridDivAll = document.querySelectorAll('.gridDiv');
+    let gridDivArray = Array.from(gridDivAll);
 
+    gridDivArray.forEach(element => element.addEventListener('mouseover', () => {
+        if (color == "random") {
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+            element.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        } else if (color == "grey") {
+            let o = Number(element.style.backgroundColor.slice(-3, -1));
+            let r = 0;
+            let g = 0;
+            let b = 0;
+            if (o < 0.9) {
+                o += 0.1;
+            }
+            element.style.backgroundColor = `rgb(${r}, ${g}, ${b}, ${o})`; 
+       } else {
+            element.style.backgroundColor = `${color}`;
+        }
+    })); 
+};
 
-// broken: function to add hover effect from outside main function
-/* gridDivArray.forEach(element => element.addEventListener('mouseover', () => {
-    element.classList.add("gridDivHover");
-})); */
+makeDivs(10);
+changeHoverColor();

@@ -1,9 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Quantico:wght@700&display=swap');
 
 body {
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     box-sizing: border-box;
+    font-family: "Noto Sans";
+    background-color: #FFF0AD;
+}
+
+h1 {
+    font-family: "Quantico";
+    font-size: 3rem;
+    color: #FFDF29;
+    text-shadow: 3px 3px black;
+}
+
+h2 {
+    color: #FFDF29;
+    text-shadow: 2px 2px black;
+    font-size: 2rem;
 }
 
 #sidebar {
@@ -15,13 +30,21 @@ body {
     margin: 0px;
     border: solid;
     border-width: 0px 3px 0px 0px;
+    background-color: #FF3F00;
 }
 
 button {
-    width: 150px;
-    height: 50px;
-    font-size: 16px;
+    width: 200px;
+    height: 75px;
+    font-size: 20px;
+    font-family: "Noto Sans";
     margin: 5px;
+    border-style: none;
+    border-radius: 15px 0px 15px 0px;
+    background-color: #FFDF29;
+    color: #000000;
+    box-shadow: 6px 6px black;
+    cursor: pointer;
 }
 
 #container {
@@ -34,6 +57,7 @@ button {
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     grid-template-columns: repeat(10, 1fr);
+    background-color: white;
 }
 
 .gridDiv {
@@ -42,4 +66,45 @@ button {
     border-color: black;
     background-color: white;
 }
+
+.slidecontainer {
+    width: 70%;
+    margin: auto;
+    height: 30px;
+    border-color: black;
+    border-radius: 15px;
+    box-shadow: 6px 6px black;
+    background-color: #FFDF29;
+    border-style: solid;
+    border-width: 3px;
+}
+
+.slider {
+    -webkit-appearance: none;  
+    appearance: none;
+    margin: 12px auto;
+    width: 100%; 
+    height: 5px; 
+    background-color: black; 
+    outline: 2px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 25px; 
+    height: 25px;
+    border-radius: 20px; 
+    background: black; 
+    cursor: pointer; 
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; 
+    height: 25px;
+    border-radius: 20px; 
+    background: black; 
+    cursor: pointer; 
+}
+
 
